@@ -1,24 +1,73 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# README
 
-Things you may want to cover:
+# テーブル設計
 
-* Ruby version
+## users テーブル
 
-* System dependencies
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| name     | string | NOT: NULL   |
+| email    | string | NOT: NULL   |
+| encrypted_password | string | NOT: NULL   |
+| nickname | string | NOT: NULL   |
+| birthday | string | NOT: NULL   |
 
-* Configuration
+### Association
 
-* Database creation
+- belongs_to :items
+- has_many :orders
 
-* Database initialization
+## items テーブル
 
-* How to run the test suite
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name   | string | NOT: NULL    |
+| info   | text   |NOT: NULL    |
+| category | string | NOT: NULL  |
+| status   | string   |NOT: NULL    |
+| shipping fee | string | NOT: NULL  |
+| shipping area   | string   |NOT: NULL    |
+| day to ship | string | NOT: NULL  |
+| price | string | NOT: NULL  |
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :addresses
+- belongs_to :users
 
-* Deployment instructions
+## orders テーブル
 
-* ...
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| seller   | string | NOT: NULL   |
+| status   | text | NOT: NULL   |
+| shipping fee | string | NOT: NULL |
+| shipping area   | string | NOT: NULL |
+| day to ship | string  |  NOT: NULL   |
+
+
+### Association
+
+- belongs_to :addresses
+- belongs_to :users
+
+## addresses テーブル
+
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| info    | string | NOT: NULL   |
+| card period | string | NOT: NULL |
+| security code | string | NOT: NULL      |
+| postal code   | string   | NOT: NULL    |
+| prefecture | string  |  NOT: NULL     |
+| city   | string   | NOT: NULL    |
+| address | string  |  NOT: NULL     |
+| buliding name   | string   | NOT: NULL    |
+| phone number | string  |  NOT: NULL     |
+
+
+### Association
+
+- belongs_to :orders
+- belongs_to :items
