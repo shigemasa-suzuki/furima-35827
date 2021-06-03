@@ -35,10 +35,11 @@
 | shipping_area_id   | integer | null: false |
 | day_to_ship_id | integer  |  null: false   |
 | price | integer | null: false  |
+| user | references |      |
 ### Association
 
 - belongs_to :user
-  has_many :orders
+  has_one :order
 
 ## orders テーブル
 
@@ -49,7 +50,7 @@
 
 ### Association
 
-- has_one :addresses
+- has_one :address
 - belongs_to :user
   belongs_to :item
  
