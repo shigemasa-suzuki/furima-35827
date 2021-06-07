@@ -7,11 +7,13 @@ class Item < ApplicationRecord
   belongs_to :day_to_ship
 
 
-  validates :category_id, numericality: { other_than: 1 } 
-  validates :status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_id, numericality: { other_than: 1 }
-  validates :shipping_area_id, numericality: { other_than: 1 }
-  validates :day_to_ship_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+  validates :category_id 
+  validates :status_id
+  validates :shipping_fee_id
+  validates :shipping_area_id
+  validates :day_to_ship_id
+  end
 
   belongs_to :user
   has_one :order
@@ -28,7 +30,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates  :price,  presence: true, format: {with: /\A[0-9]+\z/},length: {minimum: 3, maxinum: 7},numericality: { only_integer: true}
+  validates  :price,  presence: true, format: {with: /\A[0-9]+\z/},numericality: { only_integer: true}
     {greater_than: 300, less_than: 10000000}
 
   
