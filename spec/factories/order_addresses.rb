@@ -5,10 +5,7 @@ FactoryBot.define do
     city { '東京都' }
     address { '1-1' }
     buliding_name { '東京ハイツ' }
-    phone_number { 12312341234 }
-    #order_id{10}
-    user_id{2}
-    item_id{8}
+    phone_number { '12312341234' }
     token {"tok_abcdefghijk00000000000000000"}
   end
 end
