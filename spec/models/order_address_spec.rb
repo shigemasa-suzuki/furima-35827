@@ -59,6 +59,11 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Phone number is invalid")
     end
+    it 'phone_numberに数字以外が混じっていた時は購入できないこと' do
+      @order_address.phone_number = '080aaaaaaaa'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+    end
     it "user_id（購入者）が空だと購入できない" do
       @order_address.user_id = ' '
       @order_address.valid?
