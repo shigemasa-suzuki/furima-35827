@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
          has_many :items
          has_many :orders
+         has_many :messages
 
          with_options presence: true,format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/
           } do

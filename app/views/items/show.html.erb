@@ -83,8 +83,8 @@
   
 
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
+     <%= form_with(model: [@item, @message]) do |textarea| %>
+      <%= textarea.text_area :text, placeholder: "コメントする", class:"comment-text"%></textarea>
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
@@ -95,6 +95,12 @@
         <span>コメントする<span>
       </button>
     </form>
+    <% end %>
+    <div id='messages'>
+    <% @messages.reverse_each do |message| %>
+       <p><%= message.text %></p>
+       <% end %>
+       </div>
   </div>
   <div class="links">
     <a href="#" class="change-item-btn">
