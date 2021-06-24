@@ -69,3 +69,5 @@
 ### Association
 
 - belongs_to :order
+
+rails g migration AddUserIdToAddresses user:references

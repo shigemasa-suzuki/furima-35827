@@ -131,7 +131,7 @@
       <li class='list'>
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
-          <%= image_tag(item.image, class: "item-img")  %>
+          <%= image_tag(item.images[0], class: "item-img")  %>
 
         
         <% if item.order.present? %>
@@ -152,6 +152,9 @@
               <span class='star-count'>0</span>
             </div>
           </div>
+           <%item.tags.each do |tag| %>
+          <%=tag.tag%>
+            <%end%>
         </div>
         <% end %>
         <% end %>
