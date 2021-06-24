@@ -22,8 +22,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @messages = Message.all
     @message = Message.new
+    @messages = @item.messages.includes(:user)
   end
 
   def edit
@@ -48,7 +48,6 @@ class ItemsController < ApplicationController
   end
 
   def search
-    #binding.pry
     return nil if params[:keyword] == ""
     tag = Tag.where(['tag LIKE ?', "%#{params[:keyword]}%"] )
     render json:{ keyword: tag }
