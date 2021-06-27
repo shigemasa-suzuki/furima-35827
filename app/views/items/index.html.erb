@@ -1,4 +1,7 @@
 <%= render "shared/header" %>
+<% if  user_signed_in? %>
+<%= link_to 'マイページへ行く', user_path(current_user.id) %>
+<% end %>
 <div class='main'>
 
   

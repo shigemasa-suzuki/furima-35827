@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_032728) do
+ActiveRecord::Schema.define(version: 2021_06_27_074146) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -43,9 +43,23 @@ ActiveRecord::Schema.define(version: 2021_06_24_032728) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "order_id"
-    t.bigint "user_id", null: false
     t.index ["order_id"], name: "index_addresses_on_order_id"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "card_token", null: false
+    t.string "customer_token", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "item_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_orders_on_item_id"
   end
 
   create_table "item_tag_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -143,7 +157,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_032728) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "orders"
-  add_foreign_key "addresses", "users"
+  add_foreign_key "cards", "users"
+  add_foreign_key "item_orders", "items"
   add_foreign_key "item_tag_relations", "items"
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "users"

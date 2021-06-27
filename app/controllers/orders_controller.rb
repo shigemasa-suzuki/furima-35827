@@ -8,8 +8,6 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new
   end
 
-
-
   def create
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
@@ -24,7 +22,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_address).permit(:postal_code, :shipping_area_id, :city, :address, :buliding_name, :phone_number).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token] )
+    params.require(:order_address).permit(:postal_code, :shipping_area_id, :city, :address, :buliding_name, :phone_number).merge(user_id: current_user.id,item_id: params[:item_id] )
   end
 
   def set_item
@@ -32,12 +30,13 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price,  
-        card: order_params[:token],    
-        currency: 'jpy'                
-      )
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
+    customer_token = current_user.card.customer_token # ログインしているユーザーの顧客トークンを定義
+    Payjp::Charge.create(
+      amount: @item.price, # 商品の値段
+      customer: customer_token, # 顧客のトークン
+      currency: 'jpy' # 通貨の種類（日本円）
+    )
     end
 
 
