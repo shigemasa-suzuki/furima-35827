@@ -5,8 +5,9 @@ class OrdersController < ApplicationController
 
 
   def index
+    redirect_to new_card_path and return unless current_user.card.present?
     @order_address = OrderAddress.new
-  end
+ end
 
   def create
     @order_address = OrderAddress.new(order_params)
@@ -30,6 +31,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
+
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
     customer_token = current_user.card.customer_token # ログインしているユーザーの顧客トークンを定義
     Payjp::Charge.create(
