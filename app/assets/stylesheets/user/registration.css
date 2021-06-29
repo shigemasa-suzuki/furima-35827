@@ -27,7 +27,7 @@
   font-weight: bold;
 }
 
-.form-group {
+.form-group2 {
   width: 35%;
   display: flex;
   flex-direction: column;
@@ -98,6 +98,7 @@
 .input-birth-wrap {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .input-birth-wrap select {
