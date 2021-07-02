@@ -22,22 +22,23 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images,name: 'items_tag[images][]', id:"item_image" %>
       </div>
     </div>
+    <div id="image-list"></div>
     
     <div class="new-items">
       <div class="weight-bold-text">
         商品名
         <span class="indispensable">必須</span>
       </div>
-      <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <%= f.text_area :name, name: 'items_tag[name]', class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
           <span class="indispensable">必須</span>
         </div>
-        <%= f.text_area :info, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
+        <%= f.text_area :info,name: 'items_tag[info]', class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
       </div>
     </div>
     
@@ -50,12 +51,12 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category",name: 'items_tag[category_id]'}) %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:status_id, Status.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <%= f.collection_select(:status_id, Status.all, :id, :name, {}, {class:"select-box", id:"item-sales-status",name: 'items_tag[status_id]'}) %>
       </div>
     </div>
   
@@ -70,17 +71,17 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_fee_id,ShippingFee.all,:id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:shipping_fee_id,ShippingFee.all,:id, :name, {}, {class:"select-box", id:"item-shipping-fee-status",name: 'items_tag[shipping_fee_id]'}) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:shipping_area_id ,ShippingArea.all,:id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
+        <%= f.collection_select(:shipping_area_id,ShippingArea.all,:id, :name, {}, {class:"select-box", id:"item-prefecture",name: 'items_tag[shipping_area_id]'}) %>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:day_to_ship_id,DayToShip.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= f.collection_select(:day_to_ship_id,DayToShip.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery",name: 'items_tag[day_to_ship_id]'}) %>
       </div>
     </div>
   
@@ -98,7 +99,7 @@
             <span class="indispensable">必須</span>
           </div>
           <span class="sell-yen">¥</span>
-          <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>
+          <%= f.text_field :price, name: 'items_tag[price]',class:"price-input", id:"item-price", placeholder:"例）300" %>
         </div>
         <div class="price-content">
           <span>販売手数料 (10%)</span>
