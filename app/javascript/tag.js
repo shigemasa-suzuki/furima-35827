@@ -1,10 +1,10 @@
-if (location.pathname.match("items/new")){
+if (location.pathname.match("items/new")||location.pathname.match("edit")){
   document.addEventListener("DOMContentLoaded", () => {
     const inputElement = document.getElementById("items_tag_tag");
     inputElement.addEventListener("keyup", () => {
       const keyword = document.getElementById("items_tag_tag").value;
       const XHR = new XMLHttpRequest();
-      XHR.open("GET", `search/?keyword=${keyword}`, true);
+      XHR.open("GET", `/items/search/?keyword=${keyword}`, true);
       XHR.responseType = "json";
       XHR.send();
       XHR.onload = () => {
