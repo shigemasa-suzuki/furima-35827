@@ -9,6 +9,9 @@
   <%= f.label :info_eq, '説明：' %>
     <%= f.collection_select :info_eq, @item_info, :info, :info, include_blank: '指定なし'%>
     <br>
+     <%= f.label :category_id_eq, 'カテゴリー：' %>
+    <%= f.collection_select :category_id_eq, Category.all, :id, :name, include_blank: '指定なし'%>
+    <br>
     <%= f.label :status_id_eq, '商品状態：' %>
     <%= f.collection_select :status_id_eq, Status.all, :id, :name, include_blank: '指定なし'%>
     <br>
