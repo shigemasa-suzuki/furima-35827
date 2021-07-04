@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except:[:index,:show]
   before_action :set_item, only: [:edit,:show,:update,:destroy]
   before_action :move_to_index,only: [:edit,:update,:destroy]
-  before_action :research_product, only: [:index,:show,:research]
+  before_action :research_product, only: [:index,:show,:research,:desearch]
   before_action :find_item, only: :order  
 
   def index
@@ -58,6 +58,13 @@ class ItemsController < ApplicationController
     @results = @p.result
   end
 
+  def desearch
+    @items = Item.all
+    set_product_column
+    @results = @p.result  # 検索条件にマッチした商品の情報を取得
+  end
+
+
   def order 
     redirect_to new_card_path and return unless current_user.card.present?
 
@@ -100,6 +107,13 @@ class ItemsController < ApplicationController
   def find_item
     @item = Item.find(params[:id]) 
   end
+
+  def set_product_column
+    @item_name = Item.select("name").distinct  
+    @item_info = Item.select("info").distinct
+    
+  end
+
 
 
 end
