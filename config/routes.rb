@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'products/index'
+  get 'products/desearch'
   get 'cards/new'
   get 'users/show'
   get 'messages/new'
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
    collection do
     get 'search'
     get 'research'
+    get 'desearch'
+    get 'sosearch'
    end
   end
   resources :users, only: [:show, :update]

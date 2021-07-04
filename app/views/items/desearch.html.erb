@@ -1,0 +1,79 @@
+<%= render "shared/header" %>
+<h1>
+  商品検索
+</h1>
+<%= search_form_for @p, url: desearch_items_path do |f| %>
+  <%= f.label :name_eq, '商品名' %>
+  <%= f.collection_select :name_eq, @item_name, :name, :name,  include_blank: '指定なし' %>
+  <br>
+  <%= f.label :info_eq, '説明：' %>
+    <%= f.collection_select :info_eq, @item_info, :info, :info, include_blank: '指定なし'%>
+    <br>
+    <%= f.label :status_id_eq, '商品状態：' %>
+    <%= f.collection_select :status_id_eq, Status.all, :id, :name, include_blank: '指定なし'%>
+    <br>
+    <%= f.label :shipping_fee_id_eq, '配送料：' %>
+    <%= f.collection_select :shipping_fee_id_eq, ShippingFee.all, :id, :name, include_blank: '指定なし' %>
+    <br>
+    <%= f.label :shipping_area_id_eq, '発送する場所：' %>
+    <%= f.collection_select :shipping_area_id_eq, ShippingArea.all, :id, :name, include_blank: '指定なし'%>
+    <br>
+    <%= f.label :day_to_ship_eq, '発送までの日数：' %>
+    <%= f.collection_select :day_to_ship_id_eq, DayToShip.all, :id, :name, include_blank: '指定なし'%>
+    <br>
+   <%= f.label :price, '価格：' %>
+    <%= f.radio_button :price_lteq, '' %>
+    指定なし
+    <%= f.radio_button :price_lteq, '1000' %>
+    1000円以下
+    <%= f.radio_button :price_lteq, '2500' %>
+    2500円以下
+    <%= f.radio_button :price_lteq, '5000' %>
+    5000円以下
+    <br> 
+  <%= f.submit '検索' %>
+<% end %>
+<h1>
+  検索結果
+</h1>
+<%# 検索結果の個数で条件分岐 %>
+<% if @results.length !=0 %>
+<ul class='item-lists'>
+    <% @results.each do |item| %>
+      <li class='list'>
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag(item.images[0], class: "item-img")  %>
+
+        
+        <% if item.order.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+          
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.price %>円<br><%= item.shipping_fee.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+           <%item.tags.each do |tag| %>
+          <%=tag.tag%>
+            <%end%>
+        </div>
+        <% end %>
+        <% end %>
+      </li>
+      </ul>
+<% else %>
+  該当する商品はありません
+<% end %>
+<br>
+<%= link_to 'トップページへ戻る', root_path %>
