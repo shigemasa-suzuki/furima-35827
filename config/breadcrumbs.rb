@@ -22,6 +22,22 @@ crumb :order do |item|
   # link "#{item_id.name}", item_path(item)
   parent :show, item
 end
+
+crumb :desearch do
+  link "カテゴリー検索", desearch_items_path
+  parent :root
+end
+
+crumb :research do
+  link "商品名検索", research_items_path
+  parent :root
+end
+
+crumb :ushow do
+  link "マイページ", user_path
+  parent :root
+end
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end
